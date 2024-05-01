@@ -6,15 +6,23 @@
 | ------------------- | ---------- | ------------------------------ |
 | product_name        | string     | null: false                    |
 | product_description | text       | null: false                    |
-| item_category       | string     | null: false                    |
-| item_status         | string     | null: false                    |
+| item_category_id    | integer    | null: false                    |
+| item_status_id      | integer    | null: false                    |
+| charge_style_id     | integer    | null: false                    |
+| shipping_region_id  | integer    | null: false                    |
+| shipping_date_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| user                | reference  | null: false, foreign_key: true |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one    :buy
+- belongs_to :item_category
+- belongs_to :item_status
+- belongs_to :charge_style
+- belongs_to :shipping_region
+- belongs_to :shipping_date
 
 ## users テーブル
 
@@ -27,9 +35,7 @@
 | first_name         | string  | null: false |
 | last_name_kana     | string  | null: false |
 | first_name_kana    | string  | null: false |
-| birth_year         | integer | null: false |
-| birth_month        | integer | null: false |
-| birth_date         | integer | null: false |
+| birth_day          | integer | null: false |
 
 ### Association
 
@@ -40,11 +46,8 @@
 
 | Column            | Type       | Options                        |
 | ------------------| ---------- | ------------------------------ |
-| charge_style      | string     | null: false                    |
-| shipping_region   | string     | null: false                    |
-| shipping_date     | string     | null: false                    |
-| user              | reference  | null: false, foreign_key: true |
-| item              | reference  | null: false, foreign_key: true |
+| user              | references | null: false, foreign_key: true |
+| item              | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -56,13 +59,15 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| state         | string     | null: false                    |
+| post_number   | string     | null: false                    | 
+| prefecture_id | integer    | null: false                    |
 | locality      | string     | null: false                    |
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
-| phone_number  | integer    | null: false                    |
-| buy           | reference  | null: false, foreign_key: true |
+| phone_number  | string     | null: false                    |
+| buy           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :buy
+- belongs_to :prefecture
