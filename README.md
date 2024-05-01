@@ -9,7 +9,7 @@
 | item_category_id    | integer    | null: false                    |
 | item_status_id      | integer    | null: false                    |
 | charge_style_id     | integer    | null: false                    |
-| shipping_region_id  | integer    | null: false                    |
+| prefecture_id       | integer    | null: false                    |
 | shipping_date_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
@@ -35,7 +35,7 @@
 | first_name         | string  | null: false |
 | last_name_kana     | string  | null: false |
 | first_name_kana    | string  | null: false |
-| birth_day          | integer | null: false |
+| birth_day          | date    | null: false |
 
 ### Association
 
