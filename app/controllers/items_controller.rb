@@ -63,7 +63,7 @@ class ItemsController < ApplicationController
     end
 
     def sell_out
-        if @item.buys.presence
+        if @item.buy.presence
             redirect_to root_path
         end
     end

@@ -1,10 +1,11 @@
 class BuysController < ApplicationController
+    before_action :item_find, only: [:index,:create]
     before_action :sell_out,only: [:index,:create]
+    before_action :exit_buy,only: :index
     before_action :authenticate_user!
 
     def index
         gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-        @item = Item.find(params[:item_id])
         @buy_address = BuyAddress.new
     end
 
@@ -27,10 +28,13 @@ class BuysController < ApplicationController
         params.require(:buy_address).permit(:post_number, :prefecture_id, :locality, :house_number, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
     end
 
+    def item_find
+        @item = Item.find(params[:item_id])
+    end
+
 
     def sell_out
-        @item = Item.find(params[:item_id])
-        if @item.buys.presence
+        if @item.buy.presence
             redirect_to root_path
         end
     end
@@ -44,4 +48,9 @@ class BuysController < ApplicationController
         )
     end
 
+    def exit_buy
+        if current_user == @item.user
+            redirect_to root_path
+        end
+    end
 end
