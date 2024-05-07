@@ -10,11 +10,11 @@ const priceIndex = (price) => {
     const priceValue = price.value;  
     const tax = document.getElementById("add-tax-price");
     const profit = document.getElementById("profit");
-    let tax_calc = priceValue * 0.1;     
+    let tax_calc = Math.floor(priceValue * 0.1);     
     let profit_calc = priceValue - tax_calc;     
 
-    tax.innerHTML = Math.floor(tax_calc)       
-    profit.innerHTML = Math.floor(profit_calc)    
+    tax.innerHTML = tax_calc       
+    profit.innerHTML = profit_calc    
 }
 
 
